@@ -35,4 +35,26 @@ router.post("/", (req, res) => {
   });
 });
 
+const myMulter = (req, res, next) => {
+  const reqbody = [];
+
+  req.on('data', chunk => reqbody.push(chunk));
+  req.on('end', () => {
+    const lines = reqbody.toString().split("\n");
+    lines.shift();
+    lines.shift();
+    lines.shift();
+    lines.shift();
+    lines.pop();
+    lines.pop();
+
+    req.fileContents = lines.join('\n')
+    next();
+  });
+}
+
+router.post('/importar', myMulter, (req, res) => {
+  res.send(req.fileContents);
+});
+
 module.exports = router;
