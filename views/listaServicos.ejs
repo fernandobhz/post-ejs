@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste Ejs</title>
+  </head>
+  <body>
+    <ul>
+      <% listaServicosComDesconto.forEach(itemServico =>{%>
+      <li><%=itemServico.desc%> - <%=itemServico.preco%></li>
+      <% })%>
+      <form action="/servicos" method="POST">
+        <label for="desc">Descrição</label>
+        <input type="text" name="desc" id="desc" />
+        <label for="preco">Preço</label>
+        <input type="number" name="preco" id="preco" />
+        <button type="submit">Enviar</button>
+      </form>
+    </ul>
+    
+   <form method="POST" action="/servicos/importar" enctype="multipart/form-data" >
+        Arquivo: <input type="file" name="cnh">
+        <input type="submit" value="">
+
+</form>
+  </body>
+</html>

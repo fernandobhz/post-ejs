@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('post-ejs:server');
+var debug = require('debug')('exercicioejs:server');
 var http = require('http');
 
 /**
