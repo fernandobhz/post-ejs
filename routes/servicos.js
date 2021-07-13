@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const servicosController = require("../controller/servicosController");
 
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: 'C:/Users/natha/AppData/Local/Temp' });
+
 const rnds = [];
 
 /* GET servicos listing. */
@@ -53,8 +57,27 @@ const myMulter = (req, res, next) => {
   });
 }
 
-router.post('/importar', myMulter, (req, res) => {
-  res.send(req.fileContents);
+// implementacao sem a biblioteca multer
+// router.post('/importar', myMulter, (req, res) => {
+//   res.send(req.fileContents);
+// });
+
+router.post('/importar', upload.single('lista-servicos'), (req, res) => {
+  const { rnd } = req.body;
+  const { taxaDesconto = 0 } = req.query;
+
+  if (rnds.includes(rnd)) {
+    return res.render("error", {
+      message: "Esse post já foi realizado",
+      error: { status: "", stack: "" },
+    });
+  }
+
+  const itensServicoTxt = fs.readFileSync(req.file.path);
+  const itensServico = JSON.parse(itensServicoTxt);
+  servicosController.importarItensServico(itensServico);
+
+  res.redirect('/servicos');
 });
 
 module.exports = router;
