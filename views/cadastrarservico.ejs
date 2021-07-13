@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+      <form action="adicionarservico" method="POST">
+        <div>
+          <label for="desc">Descrição</label>
+          <input type="text" name="desc" />
+        </div>
+        <div>
+          <label for="preco">Preço</label>
+          <input type="number" name="preco" />
+        </div>
+        <div>
+          <button class="button" type="submit">Enviar</button>
+        </div>
+      </form>
+      <br />
+      <a class="button" href="/">Voltar</a>
+    </div>
+  </body>
+</html>

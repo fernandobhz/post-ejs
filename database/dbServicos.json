@@ -1,0 +1,22 @@
+{
+  "servicos": [
+    { "id": 1, "desc": "Tosa", "preco": 45 },
+    { "id": 2, "desc": "Banho", "preco": 30 },
+    { "id": 3, "desc": "Consulta", "preco": 150 },
+    { "id": 4, "desc": "teweet", "preco": 21 },
+    { "id": 5, "desc": "teweet", "preco": 21 },
+    { "id": 6, "desc": "teweet", "preco": 21 },
+    { "id": 7, "desc": "teweet", "preco": 21 },
+    { "id": 8, "desc": "Corte de Unha", "preco": 40 },
+    { "id": 9, "desc": "Tosa", "preco": 45 },
+    { "id": 10, "desc": "Tosa", "preco": 45 },
+    { "id": 11, "desc": "Tosa", "preco": 45 },
+    { "id": 11, "desc": "Banho", "preco": 30 },
+    { "id": 11, "desc": "Consulta", "preco": 150 },
+    { "id": 11, "desc": "teweet", "preco": 21 },
+    { "id": 11, "desc": "teweet", "preco": 21 },
+    { "id": 11, "desc": "teweet", "preco": 21 },
+    { "id": 11, "desc": "teweet", "preco": 21 },
+    { "id": 11, "desc": "Corte de Unha", "preco": 40 }
+  ]
+}

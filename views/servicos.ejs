@@ -1,65 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script>
-      const listaServico = [
-      <% listaServico.forEach(item => { %>
-        {
-          id: <%= item.id %>,
-          desc: "<%= item.desc %>",
-          preco: "<%= item.preco %>"
-        },
-      <% }); %>
-      ];
-
-      function testarDados() {
-        const id = document.forms[0].id.value;
-
-        const existe = listaServico.some(item => {
-          console.log(`typeof: ${typeof item.id} value: ${item.id}`);
-          console.log(`typeof: ${typeof Number(id)} value: ${Number(id)}`);
-          const ret = (item.id === Number(id));
-          return ret;
-        });
-
-        if (existe) {
-          alert('Esse ID já foi utilizado');
-          return false;
-        }
-
-        return true;
-      }
-    </script>
   </head>
   <body>
-    <h1></h1>
-    <ul>
-      <% listaServico.forEach(item => { %>
-      <li><%= item.id %>: <%= item.desc %> = <%= item.preco %></li>
-      <% }); %>
-    </ul>
+    <h1><%= title %></h1>
+    <p>Lista de <%= title %></p>
 
-    <hr />
+    <div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
 
-    <form method="POST">
-      Id: <input type="text" name="id" /><br />
-      Descrição: <input type="text" name="desc" /><br />
-      Preço: <input type="text" name="preco" /><br />
-      <input type="hidden" name="rnd" value="<%= rnd %>" />
-      <input type="submit" onClick="return testarDados()" />
-    </form>
+        <% for(let servico of servicos) { %>
+        <tr>
+          <td><%= servico.id %></td>
+          <td><%= servico.desc %></td>
+          <% if(!taxaDesconto) { %>
+          <td>
+            <%= Number(servico.preco.toFixed("2")).toLocaleString("pt-BR",
+            {style: 'currency', currency: 'BRL'}) %>
+          </td>
+          <% } else if (taxaDesconto) { %>
+          <td>
+            <%= Number(servico.preco - (servico.preco * taxaDesconto
+            /100).toFixed("2")).toLocaleString("pt-BR", {style: 'currency',
+            currency: 'BRL'}) %>
+          </td>
+          <% } %>
+          <td><a onclick=alerta('<%= servico.id %>','<%= servico.desc %>') class="button">Excluir</a></td>
+        </tr>
+        <% } %>
+      </table>
+      <br />
+      <a class="button" href="/">Voltar</a>
+    </div>
 
-    <hr />
-
-    <form
-      method="POST"
-      action="/servicos/importar"
-      enctype="multipart/form-data"
-    >
-      Arquivo: <input type="file" name="file" />
-      <input type="submit" />
-    </form>
+    <script>
+      const alerta = (id, desc) => { 
+        const excluir = confirm(`Deseja excluir o serviço ${desc}?`);
+        console.log(id)
+      };
+    </script>
   </body>
 </html>
