@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form action="importar/upload" method="post" enctype="multipart/form-data">
+      <label for="fileServicos">Desconto</label>
+      <input class="button" type="file" name="fileServicos" accept=".json"/>
+      <button class="button" type="submit">Enviar</button>
+    </form>
+  </body>
+</html>

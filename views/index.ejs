@@ -2,10 +2,24 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <p><a class="button" href="./servicos">Acessar</a> lista de servicos</p>
+    <p>
+      <a class="button" href="./servicos/cadastrarservico">Cadastrar</a> um novo
+      servico
+    </p>
+    <p>
+      <a class="button" href="./servicos/importar">Importar</a> lista de serviços
+    </p>
+    <form action="servicos" method="GET">
+      <label for="desconto">Desconto</label>
+      <input type="text" name="desconto" />
+      <button type="submit">Enviar</button>
+    </form>
   </body>
 </html>

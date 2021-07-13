@@ -1,3 +1,5 @@
+@import "./form.css";
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +7,44 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  background-color: #888;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  background-color: #888;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
 }
