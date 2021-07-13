@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const servicosController = require("../controller/servicosController");
+const multer = require("multer");
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'c:/windows/temp')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Data.now()+'-'+file.originalname)
+//   },
+// })
+const upload = multer({ dest: 'C:/Windows/Temp' });
+const fs = require('fs');
 
 const rnds = [];
 
@@ -53,8 +64,29 @@ const myMulter = (req, res, next) => {
   });
 }
 
-router.post('/importar', myMulter, (req, res) => {
-  res.send(req.fileContents);
+router.post('/importar', upload.single('cnh'), (req, res) => {
+  const { rnd } = req.body;
+  const { taxaDesconto = 0 } = req.query;
+
+  if (rnds.includes(rnd)) {
+    return res.render("error", {
+      message: "Esse post já foi realizado",
+      error: { status: "", stack: "" },
+    });
+  }
+
+  const itensServicosTxt= fs.readFileSync(req.file.path, "UTF-8");
+  const itensServicos = JSON.parse(itensServicosTxt);
+  servicosController.importarItensServico(itensServicos);
+
+  // rnds.push(rnd);
+
+  // const listaServico = servicosController.compilaListaServicos(taxaDesconto);
+  // res.render("servicos", {
+  //   listaServico,
+  //   rnd: Math.random().toString().slice(-5),
+  res.redirect('/servicos');
 });
+
 
 module.exports = router;
