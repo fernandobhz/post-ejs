@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const servicosController = require("../controller/servicosController");
 const multer = require("multer");
-const upload = multer({ dest: 'C:/Windows/Temp' });
-const fs = require('fs');
+const upload = multer({ dest: "C:/Windows/Temp" });
+const fs = require("fs");
 
 const rnds = [];
 
@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
       message: "Esse post já foi realizado",
       error: { status: "", stack: "" },
     });
-  }
+  };
 
   servicosController.inserirItemServico({ id, desc, preco });
 
@@ -41,8 +41,8 @@ router.post("/", (req, res) => {
 const myMulter = (req, res, next) => {
   const reqbody = [];
 
-  req.on('data', chunk => reqbody.push(chunk));
-  req.on('end', () => {
+  req.on("data", (chunk) => reqbody.push(chunk));
+  req.on("end", () => {
     const lines = reqbody.toString().split("\n");
     lines.shift();
     lines.shift();
@@ -51,12 +51,12 @@ const myMulter = (req, res, next) => {
     lines.pop();
     lines.pop();
 
-    req.fileContents = lines.join('\n')
+    req.fileContents = lines.join("\n");
     next();
   });
-}
+};
 
-router.post('/importar', upload.single("cnh"), (req, res) => {
+router.post("/importar", upload.single("cnh"), (req, res) => {
   const { rnd } = req.body;
   const { taxaDesconto = 0 } = req.query;
 
@@ -65,13 +65,12 @@ router.post('/importar', upload.single("cnh"), (req, res) => {
       message: "Esse post já foi realizado",
       error: { status: "", stack: "" },
     });
-  }
+  };
 
-  const itensServicosTxt= fs.readFileSync(req.file.path, "UTF-8");
+  const itensServicosTxt = fs.readFileSync(req.file.path, "UTF-8");
   const itensServicos = JSON.parse(itensServicosTxt);
   servicosController.importarItensServico(itensServicos);
-  res.redirect('/servicos');
+  res.redirect("/servicos");
 });
-
 
 module.exports = router;

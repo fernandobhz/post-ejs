@@ -17,7 +17,9 @@
     "nodemon": "^2.0.12"
   },
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreliman/post-ejs.git"

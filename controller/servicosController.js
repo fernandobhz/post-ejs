@@ -9,5 +9,5 @@ exports.compilaListaServicos = (taxaDesconto) =>
 exports.inserirItemServico = ({ id, desc, preco }) =>
   servicoModel.adicionarItemServico({ id, desc, preco });
 
-  exports.importarItensServico = (itensServico) =>
-   itensServico.forEach((item) => servicoModel.adicionarItemServico(item));
+exports.importarItensServico = (itensServico) =>
+  itensServico.forEach((item) => servicoModel.adicionarItemServico(item));
