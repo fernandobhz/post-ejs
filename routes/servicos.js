@@ -1,6 +1,11 @@
 const express = require("express");
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+
 const router = express.Router();
 const servicosController = require("../controller/servicosController");
+const upload = multer({dest: path.resolve(__dirname, '../', 'uploads')});
 
 const rnds = [];
 
@@ -53,8 +58,8 @@ const myMulter = (req, res, next) => {
   });
 }
 
-router.post('/importar', myMulter, (req, res) => {
-  res.send(req.fileContents);
+router.post('/importar', upload.single('file'), (req, res) => {
+  res.send(fs.readFileSync(req.file.path, "UTF-8"));
 });
 
 module.exports = router;
